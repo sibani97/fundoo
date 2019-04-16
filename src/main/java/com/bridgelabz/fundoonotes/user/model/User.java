@@ -148,7 +148,7 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", emailId=" + emailId + ", password=" + password
 				+ ", registeredDate=" + registeredDate + ", isVarified=" + isVarified + ", updatedDate=" + updatedDate
-				+ ", mobileNumber=" + mobileNumber + ", notes=" + notes +  "]";
+				+ ", mobileNumber=" + mobileNumber +  "]";
 	}
 
 

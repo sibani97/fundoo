@@ -126,6 +126,7 @@ public class NoteServiceImpl implements NoteService{
 		Long userId=userToken.tokenVerify(token);
 		User user=userRepository.findByUserId(userId).orElseThrow(()->new UserException(environment.getProperty("user.getNotes"))); 
 		List<Notes> userNote=user.getNotes().stream().filter(data->(data.isTrash()==trash && data.isArchive()==archive)).collect(Collectors.toList());
+		System.out.println(userNote);
 		return userNote;
 	}
 	

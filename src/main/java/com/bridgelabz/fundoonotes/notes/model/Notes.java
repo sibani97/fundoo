@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.bridgelabz.fundoonotes.labels.model.Labels;
 import com.bridgelabz.fundoonotes.user.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -41,6 +42,7 @@ public class Notes {
 
 	@JoinColumn(name="userId")
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
 	User user;
 	
 	

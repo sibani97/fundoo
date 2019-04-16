@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -73,8 +74,9 @@ public class NoteController {
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}
 	@GetMapping(value="/user/getnote")
-	public List<Notes> getNotes(@RequestParam String token,@RequestParam boolean trash,boolean archive)
+	public List<Notes> getNotes(@RequestParam String token,@RequestParam boolean trash,@RequestParam boolean archive)
 	{
+		System.out.println("User get note");
 		logger.info("get all notes");
 		List<Notes> note=noteServiceImpl.getAllUserNotes(token,trash,archive);
 		return note;
@@ -94,7 +96,7 @@ public class NoteController {
 //		List<Notes> note=noteServiceImpl.getArchive(token);
 //		return note;
 //	}
-	@GetMapping(value="/user/deletenote")
+	@DeleteMapping(value="/user/deletenote")
 	public ResponseEntity<Response> deleteNote(@RequestParam Long noteId,@RequestParam String token)
 	{
 		logger.info("note delete");
