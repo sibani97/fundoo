@@ -91,7 +91,7 @@ public class UserServiceImp implements UserService {
 		{
 			
 			Optional<User> user=userRepository.findByEmailId(loginDto.getEmailId());
-			return authentication(user, loginDto.getPassword());
+			return authentication(user,loginDto.getPassword());
 		}
 		
 		throw new UserException(401,environment.getProperty("user.login.error"));

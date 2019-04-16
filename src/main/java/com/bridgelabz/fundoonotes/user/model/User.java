@@ -1,14 +1,27 @@
+
 package com.bridgelabz.fundoonotes.user.model;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+
+import com.bridgelabz.fundoonotes.labels.model.Labels;
+import com.bridgelabz.fundoonotes.notes.model.Notes;
+
+
+
 @Entity
 public class User {
 	@Id
@@ -37,7 +50,68 @@ public class User {
 	@NotEmpty(message = "please provide your mobile number")
 	private String mobileNumber;
 
+	@JoinColumn(name="userId") 
+	@OneToMany(cascade=CascadeType.ALL)
+	List<Notes> notes;
 	
+	
+	@OneToMany(cascade=CascadeType.ALL)
+  @JoinColumn(name="userId")
+	List<Labels> lable;
+	 
+	
+	//@JoinColumn(name="userId")
+//	@OneToMany(cascade=CascadeType.ALL)
+//	Set<Label> lable1;
+//	public Set<Label> getLable1() {
+//		return lable1;
+//	}
+//
+//
+//
+//	public void setLable1(Set<Label> lable1) {
+//		this.lable1 = lable1;
+//	}
+
+
+
+//	public List<Label> getLable() {
+//		return lable;
+//	}
+//
+//
+//
+//	public void setLable(List<Label> lable) {
+//		this.lable = lable;
+//	}
+
+
+
+	
+
+	public List<Notes> getNotes() {
+		return notes;
+	}
+
+
+
+	public List<Labels> getLable() {
+		return lable;
+	}
+
+
+
+	public void setLable(List<Labels> lable) {
+		this.lable = lable;
+	}
+
+
+
+	public void setNotes(List<Notes> notes) {
+		this.notes = notes;
+	}
+
+
 
 	public User() {
 		super();
@@ -64,11 +138,17 @@ public class User {
 
 	
 
+
+
+	
+
+
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", emailId=" + emailId + ", password=" + password
 				+ ", registeredDate=" + registeredDate + ", isVarified=" + isVarified + ", updatedDate=" + updatedDate
-				+ ", mobileNumber=" + mobileNumber + "]";
+				+ ", mobileNumber=" + mobileNumber + ", notes=" + notes +  "]";
 	}
 
 

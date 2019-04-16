@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.bridgelabz.fundoonotes.notes.model.Notes;
 import com.bridgelabz.fundoonotes.user.model.User;
 
 @Repository
@@ -18,4 +19,5 @@ import com.bridgelabz.fundoonotes.user.model.User;
 	
 public Optional<User> findByEmailId(String email);
 public Optional<User> findByUserId(Long userId);
+
 }

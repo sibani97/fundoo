@@ -71,9 +71,10 @@ public class UserController {
 		return new ResponseEntity<Response>(status,HttpStatus.OK);
 	}
 	
-	@PutMapping(value="/user/resetpassword")
+	@PutMapping(value="user/reset")
 	public ResponseEntity<?>resetPaswords(@RequestParam String token,@RequestParam("password")String password)
 	{
+		System.out.println(token);
 		Response response=userServiceImpl.resetPaswords(token, password);
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}

@@ -29,7 +29,7 @@ public interface UserService  {
    
     Response forgetPassword(String emailId) throws UserException, UnsupportedEncodingException, MessagingException;
    
-    public Response resetPaswords(String token,String password) throws UserException;
+    Response resetPaswords(String token,String password) throws UserException;
     
     
    
