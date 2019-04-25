@@ -65,6 +65,7 @@ public class LabelController {
 	
 	@GetMapping("/getall/user/label")
 	public List<Labels> getAllUserLabel(@RequestParam String token)
+	
 	{
 		logger.info("get all user label");
 		return labelserviceImpl.getAllUserLabel(token);

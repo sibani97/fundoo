@@ -26,14 +26,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Notes {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	Long noteId;
-	String title;
-	String description;
-	boolean isPin;
-	boolean isTrash;
-	boolean archive;
-	LocalDate createDate;
-	LocalDate lastUpdateDate;
+	 private Long noteId;
+	 private String title;
+	private String description;
+	private boolean isPin;
+	private boolean isTrash;
+	private boolean archive;
+	private LocalDate createDate;
+	private LocalDate lastUpdateDate;
 //	
 //	@JoinColumn(name="mynote_id")
 //	@ManyToMany(cascade=CascadeType.ALL)
@@ -70,6 +70,8 @@ public class Notes {
 	
 	
 	@ManyToMany(mappedBy="notes")
+	@JsonIgnore
+
 	Set<Labels> label;
 	
 	
@@ -120,12 +122,12 @@ public class Notes {
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "Notes [noteId=" + noteId + ", title=" + title + ", description=" + description + ", isPin=" + isPin
-				+ ", isTrash=" + isTrash + ", archive=" + archive + ", createDate=" + createDate + ", lastUpdateDate="
-				+ lastUpdateDate + ", user=" + user +  "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Notes [noteId=" + noteId + ", title=" + title + ", description=" + description + ", isPin=" + isPin
+//				+ ", isTrash=" + isTrash + ", archive=" + archive + ", createDate=" + createDate + ", lastUpdateDate="
+//				+ lastUpdateDate + ", user=" + user + ", label=" + label + "]";
+//	}
 	public void setPin(boolean isPin) {
 		this.isPin = isPin;
 	}

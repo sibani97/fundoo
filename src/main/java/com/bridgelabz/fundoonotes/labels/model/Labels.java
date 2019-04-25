@@ -15,11 +15,18 @@ import javax.persistence.ManyToOne;
 
 import com.bridgelabz.fundoonotes.notes.model.Notes;
 import com.bridgelabz.fundoonotes.user.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Labels {
 	
 	
+	@Override
+	public String toString() {
+		return "Labels [labelId=" + labelId + ", labelName=" + labelName + ", userId=" + userId + ", notes=" + notes
+				+ "]";
+	}
+
 	@Id
 	@Column(name = "labelId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,10 +49,11 @@ public long getUserId() {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
+
 @ManyToMany
 @JoinTable(name = "note_label",
-joinColumns =  @JoinColumn(name="labelId", referencedColumnName="labelId"),
-inverseJoinColumns = { @JoinColumn(name = "noteId",referencedColumnName="noteId") })
+joinColumns =  @JoinColumn(name="label_Id", referencedColumnName="labelId"),
+inverseJoinColumns =  @JoinColumn(name = "note_Id",referencedColumnName="noteId") )
 private Set<Notes> notes;
 	
 	

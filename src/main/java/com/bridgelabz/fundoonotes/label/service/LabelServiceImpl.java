@@ -1,6 +1,7 @@
 package com.bridgelabz.fundoonotes.label.service;
 
 import java.util.List;
+import java.util.Set;
 //import java.util.Set;
 //import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -81,7 +82,7 @@ public class LabelServiceImpl implements LabelService {
 		System.out.println("user-->"+userId);
 		User user=userRepository.findById(userId).orElseThrow(()->new UserException(500,environment.getProperty("user.not.valid")));
 		Labels label=labelRepository.findByLabelId(labelId);
-		System.out.println("2");
+		
 		if(label == null) {
 			throw new LabelException(500,environment.getProperty("label.not.valid"));
 		
@@ -90,17 +91,17 @@ public class LabelServiceImpl implements LabelService {
 	{
 		System.out.println("3");
 //	List<Notes> notes=user.getNotes().stream().filter(data->data.getLabel().removeIf(noteLabel->noteLabel.getLabelId()==(labelId))).collect(Collectors.toList());
-//	System.out.println("4");
+
 //	user.getNotes().addAll(notes);
-	System.out.println("5");
+	
 	user.getLable().removeIf(data->data.getLabelId()==(labelId));
-	System.out.println("6");
+
 //		labelRepository.delete(label);
 	
 	userRepository.save(user);
 
 	
-	System.out.println("7");
+	
 	Response response=StatusHelper.statusResponseInfo(environment.getProperty("delete.label"),600);
 	return response;
 	}
@@ -124,11 +125,17 @@ public class LabelServiceImpl implements LabelService {
 	    userRepository.save(user);
 	}
 	label=user.getLable().stream().filter(data->data.getLabelName().equals(labelDto.getLabelName())).findFirst().get();
+	System.out.println(label.toString());
 	Notes note=user.getNotes().stream().filter(data->data.getNoteId().equals(noteId)).findFirst().orElseThrow(()->new NoteException(100,environment.getProperty("note.invalid")));
+	System.out.println(note);
 	if(note.getLabel().stream().filter(data->data.getLabelName().equals(labelTitle)).findFirst().isPresent()==false)
 	{
+		System.out.println(label.toString());
+		label.getNotes().add(note);
+		labelRepository.save(label);
 		note.getLabel().add(label);
-		noteRepository.save(note);
+		Notes save = noteRepository.save(note);
+		System.out.println(save);
 		response=StatusHelper.statusResponseInfo(environment.getProperty("label.note.added"),100);
 		return response;
 	}
